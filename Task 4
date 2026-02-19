@@ -1,0 +1,13 @@
+SELECT
+		category,
+		Sum(total_sales) As total_sales,
+		AVG(discount) AS avg_discount,
+		CASE
+			When AVG(discount) >= 0.3 THEN 'Discount-Heavy'
+			When AVG(discount) >= 0.2 Then 'Moderate Discount'
+			ElSE 'Low'
+		END AS discount_behavior	
+FROM sales_analysis
+Group by category
+HAVING COUNT(*)>1
+ORDER BY avg_discount DESC;

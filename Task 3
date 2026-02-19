@@ -1,0 +1,13 @@
+SELECT
+		city,
+		COUNT(*) as transaction_volume,
+	CASE
+		WHEN COUNT(*) >= 4 THEN 'High Activity'
+		WHEN COUNT(*) >= 3 THEN 'Medium Activity'
+		ELSE 'Low Activity' 
+	END AS city_activity
+FROM sales_analysis
+WHERE year = 2023
+GROUP BY city
+HAVING COUNT(*) > 1
+ORDER BY  transaction_volume DESC;

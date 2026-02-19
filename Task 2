@@ -1,0 +1,15 @@
+SELECT
+	category,
+	SUM(total_sales) as total_sales,
+	AVG(discount) as  avg_discount,
+	COUNT(transaction_id) as transaction_id,
+	CASE
+	  	WHEN SUM (total_sales) > 75000 THEN 'Strong Performer'
+		WHEN SUM (total_sales) >= 55000 THEN 'Average Performer' 
+		ELSE 'Underperformer'
+	END AS performance_label
+FROM sales_analysis
+WHERE year = 2023
+GROUP by category
+HAVING SUM(total_sales) > 40000
+ORDER BY total_sales DESC;

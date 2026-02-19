@@ -1,0 +1,19 @@
+Select 
+		total_sales,
+		discount,
+		category,
+		transaction_id,
+	Case
+			When discount between 0 and 0.2 Then 'Low'
+			When discount <= 0.4 Then 'Medium'
+			Else 'High'
+		End AS discount_category	
+From sales_analysis
+Where category ='Electronics' AND year = 2023
+Group by category, total_sales, discount,transaction_id
+Order by discount ASC,total_sales DESC
+Limit 300;
+
+
+
+
