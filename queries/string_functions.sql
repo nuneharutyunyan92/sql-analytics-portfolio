@@ -11,6 +11,9 @@ CREATE TABLE transactions_text_demo (
 
 
 INSERT INTO transactions_text_demo
+
+
+
 SELECT
   gs AS transaction_id,
   (RANDOM() * 200)::INT + 1 AS customer_id,
@@ -42,3 +45,45 @@ SELECT
   COUNT(DISTINCT raw_phone) AS distinct_raw_phones,
   COUNT(DISTINCT category_raw) AS distinct_categories
 FROM transactions_text_demo;
+
+
+SELECT 	
+raw_phone 
+FROM transactions_text_demo;
+
+SELECT
+LENGTH (raw_phone) AS phone_length
+FROM transactions_text_demo
+ORDER BY (raw_phone) ASC;
+
+SELECT
+raw_phone,
+POSITION ('-' IN raw_phone) AS hyphen_pos
+FROM transactions_text_demo;
+
+SELECT
+raw_phone,
+STRPOS ( raw_phone, '(' ) AS paren_pos
+FROM transactions_text_demo;
+
+
+SELECT
+LENGTH (raw_phone) AS phone_length,
+POSITION ('-' IN raw_phone) AS hyphen_pos,
+STRPOS ( raw_phone, '(' ) AS paren_pos
+FROM transactions_text_demo
+GROUP BY 
+		LENGTH (raw_phone),
+		POSITION ('-' IN raw_phone),
+		STRPOS ( raw_phone, '(' );
+
+SELECT
+	category_raw,
+	COUNT(*) AS transaction_count
+FROM transactions_text_demo
+GROUP BY category_raw
+ORDER BY COUNT(*) DESC;
+
+
+
+
