@@ -1,0 +1,1 @@
+FROM analytics.hotel_bookings
